@@ -50,3 +50,25 @@ def new_post(request):
     else:
         form = NewPostForm()
     return render(request, 'new_post.html', {'current_user':current_user, 'form':form})
+
+def update_profile(request):
+    """
+    Function that enables one to edit their profile information
+    """
+    current_user = request.user
+    profile = Profile.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=Profile.objects.get(user_id=current_user))
+        if form.is_valid():
+                profile = form.save(commit=False)
+                profile.user = current_user
+                profile.save()
+        return redirect('home')
+
+    
+    else:
+        if Profile.objects.filter(user_id=current_user).exists():
+            form = ProfileForm(instance = Profile.objects.get(user_id=current_user))
+        else:
+            form = ProfileForm()
+    return render(request, 'profile/edit-profile.html', {'current_user':current_user, 'form':form})
