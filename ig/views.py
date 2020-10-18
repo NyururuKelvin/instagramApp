@@ -8,4 +8,5 @@ def index(request):
     # Default view
     posts=Post.objects.all()
     comments = Comment.get_comments()
-    return render(request, 'temps/index.html', {'posts':posts, 'comments':comments})
+    profiles = Profile.objects.all()
+    return render(request, 'temps/index.html', {'posts':posts, 'comments':comments,'profiles':profiles})
