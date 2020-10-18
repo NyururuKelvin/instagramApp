@@ -35,3 +35,18 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form, 'name':name})
+
+
+def new_post(request):
+    current_user = request.user
+   
+    if request.method == 'POST':
+        form = NewPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user= current_user
+            post.save()
+        return redirect('home')
+    else:
+        form = NewPostForm()
+    return render(request, 'new_post.html', {'current_user':current_user, 'form':form})
