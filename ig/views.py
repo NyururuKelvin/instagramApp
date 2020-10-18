@@ -126,7 +126,7 @@ def search_user(request):
 def likes(request,id):
     likes=0
     post = Post.objects.get(id=id)
-    post.like = post.like+1
+    post.likes = post.likes+1
     post.save()    
     return redirect("home")
 

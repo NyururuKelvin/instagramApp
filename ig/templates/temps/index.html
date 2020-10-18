@@ -21,7 +21,7 @@
 
 
                     {%if post.user.profile.profile_photo%}
-                    <a href="{% url 'profile' post.user.id %}"><img class="img-circle" src="{{post.user.profile.profile_photo.url}}"
+                    <a href="{% url 'profile' post.user.id %}"><img class="img-circle" src="{{post.user.profile.photo.url}}"
                             style="height:70px;width: 70px;">
                         <strong style="font-size:19px;">{{post.user.username | title}}</strong>
                     </a>
@@ -37,17 +37,16 @@
 
                 <div class="card-body text-center">
                    
-                    <img class="img-fluid" src="{{post.post_image.url}}" style="height: 400px; width: 500px;"
+                    <img class="img-fluid" src="{{post.image.url}}" style="height: 60vh; width: 500px;"
                         type="button" class="btn btn-sm btn-outline-primary" id="post{{post.id}}"
                         data-whatever="{{post.id}}" data-toggle="modal" data-target="#extraModal{{post.id}}">
                 </div>
 
                 <div class="card-footer bg-white">
-                    <a href="{% url 'like' post.id %}"><i class="far fa-heart"></i>{{post.like}}</a>
+                    <a href="{% url 'like' post.id %}"><i class="far fa-heart"></i>{{post.likes}}</a>
                     <a href=""><i class="far fa-comment"></i></a>
                     
-                    <p><a href="{% url 'profile' post.user.id %}"><strong>{{post.user.username}}</strong> </a>{{post.caption}}</p>
-                    <p style="font-size: 20px;color:gray;">{{post.pub_date}}</p>
+                    <p><a href="{% url 'profile' post.user.id %}" style="color: black;"><strong>{{post.user.username}}</strong> </a>{{post.caption}}</p>
                    
                     <strong>Comments:</strong>
                     {% for comment in comments %}

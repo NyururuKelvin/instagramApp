@@ -1,4 +1,12 @@
+{% load bootstrap3 %}
 {% load static%}
+{% block styles %}
+  {% bootstrap_css %}
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap" rel="stylesheet">
+{% endblock %}
+
 
 <nav class="navbar" style="box-shadow:1px 2px rgb(209, 208, 208); background-color: white;">
   <div class="container-fluid">
@@ -11,7 +19,7 @@
       {% if user.is_authenticated %}
       <ul class="nav navbar-nav">
         <div class='instalogo'>
-          <a href='/'><img src="../static/images/log.png" alt="intagram"></a>
+          <a class="navbar-brand" href="{% url 'home' %}" style="font-family: 'Grand Hotel', cursive; font-size: xx-large; padding-left: 100%; color: black;">Instagram</a>
           
           </div>
 
@@ -23,7 +31,7 @@
         <div class="search_bar">
           <form class="form-inline ml-auto" action="{% url 'search' %}" method="GET">
             <input class="form-control mr-sm-2" name="username" type="search" role="search" placeholder="Search"
-              aria-label="Search">
+              aria-label="Search" style="margin-left: 90%; margin-top: 3%;">
           </form>
         </div>
       
@@ -31,19 +39,19 @@
 
       <ul class="nav navbar-nav navbar-right">
         <div class='contact_icons'>
-          <a href='/'><span class="glyphicon glyphicon-home"></span></a>
-          <a class='explore' href='/'><i class="far fa-compass"></i></a>
-          <a class='likes' href='/'><i class="far fa-heart"></i></a>
+          <a href='/'><span class="glyphicon glyphicon-home" style="color: black;"></span></a>
+          <a class='explore' href='/'><i class="far fa-compass" style="color: black; margin-left: 15px;"></i></a>
+          <a class='likes' href='/'><i class="far fa-heart" style="color: black; margin-left: 15px;"></i></a>
           {%if User.profile.dp%}
           <a href="/profile" ><img class="rounded-circle" src="{{user.profile.dp.url}}"
-            style="height:70px;width: 70px;">
+            style="height:60px;width: 60px; border-radius: 60px;">
           <strong style="font-size:19px;">{{current_user.username | title}}</strong>
           </a> 
           {%else%}
-          <a class='profile' href="/user/{{user.id}}"><i class="far fa-user"></i></a>
+          <a class='profile' href="/user/{{user.id}}"><i class="far fa-user" style="color: black; margin-left: 15px;"></i></a>
           {%endif%}
           
-          <a class='post' href="/newpost"><span class="material-icons">add_a_photo</span></a>
+          <a class='post' href="/newpost"><span class="material-icons" style="color: black; margin-left: 15px;">add_a_photo</span></a>
           
           
          {% endif %}
