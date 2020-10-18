@@ -19,7 +19,7 @@
       {% if user.is_authenticated %}
       <ul class="nav navbar-nav">
         <div class='instalogo'>
-          <a class="navbar-brand" href="{% url 'home' %}" style="font-family: 'Grand Hotel', cursive; font-size: xx-large; padding-left: 100%; color: black;">Instagram</a>
+          <a class="navbar-brand" href="{% url 'home' %}" style="font-family: 'Grand Hotel', cursive; font-size: xx-large; margin-left: 120%; color: black;">Instagram</a>
           
           </div>
 
@@ -30,8 +30,7 @@
       <ul class="nav navbar-nav ">
         <div class="search_bar">
           <form class="form-inline ml-auto" action="{% url 'search' %}" method="GET">
-            <input class="form-control mr-sm-2" name="username" type="search" role="search" placeholder="Search"
-              aria-label="Search" style="margin-left: 90%; margin-top: 3%;">
+            <input class="form-control mr-sm-2" name="username" type="search" role="search" placeholder="Search" aria-label="Search" style="margin-left: 90%; margin-top: 3%;">
           </form>
         </div>
       
@@ -51,7 +50,7 @@
           <a class='profile' href="/user/{{user.id}}"><i class="far fa-user" style="color: black; margin-left: 15px;"></i></a>
           {%endif%}
           
-          <a class='post' href="/newpost"><span class="material-icons" style="color: black; margin-left: 15px;">add_a_photo</span></a>
+          <a class='post' href="/newpost"><span class="material-icons" style="color: black; margin-left: 15px; text-decoration: none;">Upload photo</span></a>
           
           
          {% endif %}
