@@ -72,3 +72,46 @@ def update_profile(request):
         else:
             form = ProfileForm()
     return render(request, 'profile/edit-profile.html', {'current_user':current_user, 'form':form})
+
+def profile(request, user_id):
+    """
+    Function that enables one to see their profile
+    """
+    current_user = request.user
+    user = User.objects.get(pk=user_id)
+    posts = Post.get_posts()
+    comments = Comment.get_comments()
+    credentials = Profile.objects.filter(user = user_id)
+    
+    if Follow.objects.filter(following=request.user,follower= user).exists():
+        follows_me =True
+
+    else:
+        follows_me=False
+    followers=Follow.objects.filter(follower = user).count()
+    following=Follow.objects.filter(following = user).count()
+
+    return render(request, 'profile/profile.html', {'follows_me':follows_me,'following':following,'followers':followers,'current_user':current_user, 'posts':posts, 'comments':comments, 'credentials':credentials})
+
+def search_user(request):
+    """
+    Function that searches for profiles based on the usernames
+    """
+    if 'username' in request.GET and request.GET["username"]:
+        search_term = request.GET.get("username")
+        searched_profiles = User.objects.filter(username__icontains=search_term)
+        message = f"{search_term}"
+        profiles = User.objects.all()
+        
+        return render(request, 'search.html', {"message": message, "usernames": searched_profiles, "profiles": profiles, })
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'search.html', {"message": message})
+
+def likes(request,id):
+    likes=0
+    post = Post.objects.get(id=id)
+    post.like = post.like+1
+    post.save()    
+    return redirect("home")
