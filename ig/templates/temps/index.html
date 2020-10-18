@@ -2,5 +2,29 @@
 
 {% block content %}
     {{block.super}}
-    <h4>Testing</h4>
+    <div class="container">
+        <div class="row">
+            {%for image in images%}
+            {%for profile in profiles%}
+            <div class="col-lg-2 col-md-2"></div>
+            <div class="col-lg-8 col-md-8 mt-2">
+                <div class="card m-3" style="width: auto; margin-left: 10px;">
+                    <div>
+                        <img class="m-2 rounded-circle" src="{{image.image.url}}" alt="" style="height: 40px; width: 40px;"><a href="" style="text-decoration: none;">{{image.name}}</a>
+                    </div>
+                    <a href=""><img src="{{image.image.url}}" class="card-img-top img-responsive index_image" id="image" alt="IMAGE" title="" style="height:70vh; width: 100%;" ></a>
+                    <div class="card-body">
+                        <p style="font-size: 1.8em;"> <a href="" style="text-decoration: none; color: black;"><i class="far fa-comment"></i> </a style="text-decoration: none; color: black;"> <i class="far fa-heart"></i>
+                        </p>
+                        <p class="" style="font-weight:bolder ;">{{image.likes}} <span class="ml-1">likes</span></p>
+                        <p class="card-text" style="font-size: 0.9em;"><a href="" class="mr-1" style="font-weight: bolder ; text-decoration: none;">{{imagename}}</a>{{image.caption}}</p>
+                    </div>
+                    
+                </div>               
+            </div>
+            <div class="col-lg-2 col-md-2"></div>
+            {%endfor%}
+            {%endfor%}
+        </div>
+    </div>
 {% endblock %}

@@ -6,7 +6,7 @@ from .models import Post, Comment, Profile
 def index(request):
 
     # Default view
-    images=Image.objects.all()
+    images=Post.objects.all()
     comments = Comment.get_comments()
     profiles = Profile.objects.all()
     return render(request, 'temps/index.html', {'images':images, 'comments':comments,'profiles':profiles})
