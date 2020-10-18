@@ -1,16 +1,22 @@
 {%extends 'temps/base.html'%}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block styles %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+{% endblock %}
 
 {% block content %}
     {{block.super}}
     <div class="container">
         <div class="row">
             {%for image in images%}
-            {%for profile in profiles%}
-            <div class="col-lg-2 col-md-2"></div>
             <div class="col-lg-8 col-md-8 mt-2">
                 <div class="card m-3" style="width: auto; margin-left: 10px;">
                     <div>
-                        <img class="m-2 rounded-circle" src="{{image.image.url}}" alt="" style="height: 40px; width: 40px;"><a href="" style="text-decoration: none;">{{image.name}}</a>
+                        <img class="m-2 rounded-circle" src="{{image.image.url}}" alt="" style="height: 50px; width: 50px; border-radius: 50px;"><a href="" style="text-decoration: none;"> {{image.name}}</a>
                     </div>
                     <a href=""><img src="{{image.image.url}}" class="card-img-top img-responsive index_image" id="image" alt="IMAGE" title="" style="height:70vh; width: 100%;" ></a>
                     <div class="card-body">
@@ -24,7 +30,6 @@
             </div>
             <div class="col-lg-2 col-md-2"></div>
             {%endfor%}
-            {%endfor%}
-        </div>
+        
     </div>
 {% endblock %}
