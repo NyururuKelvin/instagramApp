@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http  import HttpResponse, Http404,HttpResponseRedirect
-from .models import Post, Comment, Profile
+from .models import Post, Comment, Profile, Follow
 from django.contrib.auth.models import User
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
@@ -116,3 +116,14 @@ def likes(request,id):
     post.like = post.like+1
     post.save()    
     return redirect("home")
+
+def follow(request,user_id):
+    user = User.objects.get(id=user_id)
+    follows_me=False
+    if Follow.objects.filter(following=request.user,follower=user).exists():
+        Follow.objects.filter(following=request.user,follower=user).delete()
+        follows_me=False
+    else:
+        Follow(following=request.user,follower=user).save()
+        follows_me=True
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
