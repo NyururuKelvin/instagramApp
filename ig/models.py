@@ -11,6 +11,11 @@ class Post(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField(default=0)
 
+    @classmethod
+    def get_posts(cls):
+        posts = cls.objects.all()
+        return posts
+        
     def save_post(self):
         self.save()
 

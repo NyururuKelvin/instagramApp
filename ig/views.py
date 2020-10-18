@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http  import HttpResponse, Http404,HttpResponseRedirect
 from .models import Post, Comment, Profile, Follow
 from django.contrib.auth.models import User
@@ -11,10 +11,23 @@ from .forms import SignUpForm, NewPostForm, CommentForm, ProfileForm
 def index(request):
 
     # Default view
-    images=Post.objects.all()
+    current_user = request.user
+    posts = Post.objects.all()
     comments = Comment.get_comments()
     profiles = Profile.objects.all()
-    return render(request, 'temps/index.html', {'images':images, 'comments':comments,'profiles':profiles})
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = current_user
+            comment.post = Post.objects.get(id=int(request.POST["post_id"]))
+            comment.save()
+            return redirect('home')
+    else:
+        form = CommentForm()
+
+    return render(request, 'temps/index.html', {'current_user':current_user,'posts':posts, 'form':form, 'comments':comments,'profiles':profiles})
 
 def signup(request):
     name = "Sign Up"
@@ -50,7 +63,7 @@ def new_post(request):
         return redirect('home')
     else:
         form = NewPostForm()
-    return render(request, 'new_post.html', {'current_user':current_user, 'form':form})
+    return render(request, 'temps/new_post.html', {'current_user':current_user, 'form':form})
 
 def update_profile(request):
     """

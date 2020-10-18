@@ -8,28 +8,111 @@
 
 {% endblock %}
 
-{% block content %}
-    {{block.super}}
-    <div class="container">
-        <div class="row">
-            {%for image in images%}
-            <div class="col-lg-8 col-md-8 mt-2">
-                <div class="card m-3" style="width: auto; margin-left: 10px;">
-                    <div>
-                        <img class="m-2 rounded-circle" src="{{image.image.url}}" alt="" style="height: 50px; width: 50px; border-radius: 50px;"><a href="" style="text-decoration: none;"> {{image.name}}</a>
-                    </div>
-                    <a href=""><img src="{{image.image.url}}" class="card-img-top img-responsive index_image" id="image" alt="IMAGE" title="" style="height:70vh; width: 100%;" ></a>
-                    <div class="card-body">
-                        <p style="font-size: 1.8em;"> <a href="" style="text-decoration: none; color: black;"><i class="far fa-comment"></i> </a style="text-decoration: none; color: black;"> <i class="far fa-heart"></i>
-                        </p>
-                        <p class="" style="font-weight:bolder ;">{{image.likes}} <span class="ml-1">likes</span></p>
-                        <p class="card-text" style="font-size: 0.9em;"><a href="" class="mr-1" style="font-weight: bolder ; text-decoration: none;">{{imagename}}</a>{{image.caption}}</p>
-                    </div>
+{%block content%}
+{{block.super}}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2"></div>
+
+        <div class="col-sm-8">
+            {%for post in posts%}
+            <div class="card" style="margin-top:5%;margin-bottom:1%;">
+                <div class="card-header">
+
+
+                    {%if post.user.profile.profile_photo%}
+                    <a href="{% url 'profile' post.user.id %}"><img class="img-circle" src="{{post.user.profile.profile_photo.url}}"
+                            style="height:70px;width: 70px;">
+                        <strong style="font-size:19px;">{{post.user.username | title}}</strong>
+                    </a>
+
+                    {%else%}
+
+                    <a class="fa fa-user fa-3x" style="margin-top:1%" href="/user/{{user.id}}"><span
+                            style="font-size:19px;">{{post.user.username | title}}</span></a>
+                    {%endif%}
                     
-                </div>               
+
+                </div>
+
+                <div class="card-body text-center">
+                   
+                    <img class="img-fluid" src="{{post.post_image.url}}" style="height: 400px; width: 500px;"
+                        type="button" class="btn btn-sm btn-outline-primary" id="post{{post.id}}"
+                        data-whatever="{{post.id}}" data-toggle="modal" data-target="#extraModal{{post.id}}">
+                </div>
+
+                <div class="card-footer bg-white">
+                    <a href="{% url 'like' post.id %}"><i class="far fa-heart"></i>{{post.like}}</a>
+                    <a href=""><i class="far fa-comment"></i></a>
+                    
+                    <p><a href="{% url 'profile' post.user.id %}"><strong>{{post.user.username}}</strong> </a>{{post.caption}}</p>
+                    <p style="font-size: 20px;color:gray;">{{post.pub_date}}</p>
+                   
+                    <strong>Comments:</strong>
+                    {% for comment in comments %}
+                    {%if post.id == comment.post.id%}
+                    <p><a href="{% url 'profile' post.user.id %}"><strong>{{comment.user.username}}</strong></a> {{comment.comment | title}}</p>
+                    {%endif%}
+                    {% endfor %}
+
+                    <form method="post" style="margin-top: 1.3em;">
+                        {{form.comment}}
+                        {% csrf_token %}
+                        <input type="hidden" value="{{post.id}}" name="post_id" />
+                        <button type="submit" class="btn btn-primary">Comment</button>
+                    </form>
+                </div>
+
             </div>
-            <div class="col-lg-2 col-md-2"></div>
+
             {%endfor%}
-        
+        </div>
+
+        <div class="col-sm-2"></div>
     </div>
-{% endblock %}
+
+    {% for post in posts %}
+
+    <div class="modal fade" id="extraModal{{post.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+
+            <div class="modal-content ">
+
+
+                <div class="modal-body row" style="padding:0;">
+                    <img style="height: 500px;padding:0;margin: 0;" id="image" class=" col-12 col-md-7 text-center"
+                        src='{{post.post_image.url}}'>
+
+                    <div class=" col-12 col-md-5 card">
+                        <div class="card-header bg-white">
+                            <p><span>Posted by:
+                                </span><strong>{{post.user.username| title}}</strong></p>
+                            <p><span>Caption:
+                                </span>{{post.caption}}</p>
+
+                        </div>
+
+                        <div class="card-body">
+                            {% for comment in comments %}
+                            {%if post.id == comment.post.id%}
+                            <p><strong>{{comment.user.username}}</strong> {{comment.comment | title}} <span
+                                    style="font-size: 10px;color:gray;">{{comment.pub_date}}</span></p>
+                            {%endif%}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+</div>
+
+{%endblock%}
