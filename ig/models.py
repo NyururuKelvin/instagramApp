@@ -2,11 +2,11 @@ from django.db import models
 
 # Models
 class Post(models.Model):
-    post_image = models.ImageField(upload_to = 'posts/')
+    image = models.ImageField(upload_to = 'posts/', default='No Image')
     name = models.CharField(max_length=60)
     caption = models.CharField(max_length=60)
     pub_date = models.DateTimeField(auto_now_add=True)
-    like = models.IntegerField(default=0)
+    likes = models.IntegerField(default=0)
 
     def save_post(self):
         self.save()
@@ -22,7 +22,7 @@ class Comment(models.Model):
         return comments
 
 class Profile(models.Model):
-    profile_photo = models.ImageField(upload_to = 'posts/')
+    photo = models.ImageField(upload_to = 'posts/', default='No Image')
     bio = models.TextField(max_length=255)
 
     def save_profile(self):
