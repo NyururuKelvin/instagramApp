@@ -6,7 +6,8 @@ from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm, NewPostForm, CommentForm, ProfileForm
 
-# Create your views here.
+# Views.
+@login_required(login_url='/accounts/login/')
 def index(request):
 
     # Default view
