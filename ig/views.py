@@ -3,4 +3,4 @@ from django.http  import HttpResponse
 
 # Create your views here.
 def index(request):
-    return HttpResponse('Welcome to IG App')
+    return render(request, 'temps/index.html')
