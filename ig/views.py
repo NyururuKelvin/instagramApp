@@ -3,6 +3,7 @@ from django.http  import HttpResponse, Http404,HttpResponseRedirect
 from .models import Post, Comment, Profile
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
+from .forms import SignUpForm, NewPostForm, CommentForm, ProfileForm
 
 # Create your views here.
 def index(request):
