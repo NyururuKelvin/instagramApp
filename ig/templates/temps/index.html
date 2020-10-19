@@ -12,7 +12,7 @@
 {{block.super}}
 <div class="container">
     <div class="row">
-        <div class="col-sm-2"></div>
+        <div class="col-sm-1"></div>
 
         <div class="col-sm-7">
             {%for post in posts%}
@@ -35,7 +35,7 @@
 
                 </div>
 
-                <div class="card-body text-center">
+                <div class="card-body text-center" style="margin-bottom: 0%;">
                    
                     <img class="img-fluid" src="{{post.image.url}}" style="height: 80vh; width: 100%;"
                         type="button" class="btn btn-sm btn-outline-primary" id="post{{post.id}}"
@@ -69,7 +69,7 @@
             {%endfor%}
         </div>
 
-        <div class="col-sm-2"></div>
+        <div class="col-sm-4"></div>
     </div>
 
     {% for post in posts %}
