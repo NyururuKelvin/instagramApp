@@ -18,7 +18,7 @@ The project is created with:
 
 ## Installation
 * Clone the repository directly to your pc using this command
-    https://github.com/NyururuKelvin/pitches-master.git
+    https://github.com/NyururuKelvin/instagramApp-master.git
 * To be able to run this project on your PC you need to have python already installed Python version 3.6 and above. Incase you dont have it use this commands to install
     $ sudo add-apt-repository ppa:jonathonf/python-3.6
     $ sudo apt-get update
