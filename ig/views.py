@@ -48,7 +48,7 @@ def signup(request):
         return redirect('home')
     else:
         form = SignUpForm()
-    return render(request, 'registration/signup.html', {'form': form, 'name':name})
+    return render(request, 'registration/registration_form.html', {'form': form, 'name':name})
 
 
 def new_post(request):

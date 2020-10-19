@@ -23,7 +23,7 @@
                     {%if post.user.profile.photo%}
                     <a href="{% url 'profile' post.user.id %}"><img class="img-circle" src="{{post.user.profile.photo.url}}"
                             style="height:50px;width: 50px; margin-top: 1%; margin-left: 2%; margin-bottom: 1%;">
-                        <strong style="font-size:19px; color: black; font-weight: 50;">{{post.user.username | title}}</strong>
+                        <strong style="font-size:19px; color: black; font-weight: 50; text-decoration: none;">{{post.user.username | title}}</strong>
                     </a>
 
                     {%else%}
