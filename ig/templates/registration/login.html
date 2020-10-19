@@ -2,6 +2,14 @@
 {% load bootstrap3 %}
 {% load static%}
 
+{% block styles %}
+  {% bootstrap_css %}
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
 {% block content %}
 <div class="container-fluid">
   <div class="row">
@@ -18,7 +26,7 @@
       <div class="card" style="margin-top:7%;padding-left: 10%;border-radius:3%;">
 
         <div class="card-heading">
-            <img src="{{request.scheme}}://{{request.META.HTTP_HOST}}{% static 'images/logo.jpg' %}" class="img-fluid" style="height:30%;width:30%">
+            <h1 style="font-family: 'Grand Hotel', cursive;">Instagram</h1>
           {%if name%}
           <strong><p class="text-secondary" style="font-size:17px;">{{name}} to see photos and videos from your friends.</p></strong>
           {%else%}
