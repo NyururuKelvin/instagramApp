@@ -1,4 +1,4 @@
-{%extends 'base.html'%}
+{%extends 'temps/base.html'%}
 {% load static %}
 
 
@@ -12,9 +12,9 @@
 
   <div class="row">
     {% if usernames %}
-    <h2>Found {{ usernames|length }} user(s) with that username {{message}}</h2>
+    <h1 style="font-family: 'Grand Hotel', cursive;">Found {{ usernames|length }} user(s) with username {{message}}</h1>
     {% else %}
-    <h2> Found 0 users for the search term {{message}}</h2>
+    <h1 style="font-family: 'Grand Hotel', cursive;"> Found 0 users for the search term {{message}}</h1>
     {% endif %}
 
   </div>
@@ -24,8 +24,7 @@
     <div class="container">
       <ul class="list-inline">
         <li class="list-inline-item">
-          <a href="" class="others"><strong class="list-inline"> {{user.username}} </strong>
-          </a>
+          <h2><a href="" class="others"><class="list-inline" style="color: black; text-decoration: none;"> {{user.username}}</a></h2>
         </li>
         {% if user in users %}
         <li class="list-inline-item">

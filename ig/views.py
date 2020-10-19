@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm, NewPostForm, CommentForm, ProfileForm
 
 # Views.
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/login/')
 def index(request):
 
     # Default view
@@ -50,7 +50,7 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'registration/registration_form.html', {'form': form, 'name':name})
 
-
+@login_required(login_url='/accounts/login/')
 def new_post(request):
     current_user = request.user
    
@@ -65,6 +65,7 @@ def new_post(request):
         form = NewPostForm()
     return render(request, 'temps/new_post.html', {'current_user':current_user, 'form':form})
 
+@login_required(login_url='/accounts/login/')
 def update_profile(request):
     """
     Function that enables one to edit their profile information
@@ -86,6 +87,7 @@ def update_profile(request):
         else:
             form = ProfileForm()
     return render(request, 'profile/edit-profile.html', {'current_user':current_user, 'form':form})
+
 
 def profile(request, user_id):
     """
@@ -117,7 +119,7 @@ def search_user(request):
         message = f"{search_term}"
         profiles = User.objects.all()
         
-        return render(request, 'search.html', {"message": message, "usernames": searched_profiles, "profiles": profiles, })
+        return render(request, 'temps/search.html', {"message": message, "usernames": searched_profiles, "profiles": profiles, })
 
     else:
         message = "You haven't searched for any term"
