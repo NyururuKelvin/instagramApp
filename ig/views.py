@@ -86,7 +86,7 @@ def update_profile(request):
             form = ProfileForm(instance = Profile.objects.get(user_id=current_user))
         else:
             form = ProfileForm()
-    return render(request, 'profile/edit-profile.html', {'current_user':current_user, 'form':form})
+    return render(request, 'profile/edit-profile.html', {'current_user':current_user, 'form':form, 'profile':profile})
 
 
 def profile(request, user_id):
